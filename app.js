@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 4000
 
 
 app.use(express.json());
@@ -22,7 +22,7 @@ app.post('/toggle-identity', (req, res) => {
         return res.status(400).json({ error: 'Invalid payload' });
     }
 
-    const trustScore = Math.floor(Math.random() * 41) + 60; 
+    const trustScore = Math.floor(Math.random() * 41) + 60;
     const riskLevel = trustScore >= 80 ? 'low' : trustScore >= 60 ? 'medium' : 'high';
 
     res.json({
@@ -38,5 +38,5 @@ app.post('/toggle-identity', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on ${PORT}`);
 });
